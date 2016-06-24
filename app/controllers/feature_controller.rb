@@ -14,7 +14,6 @@ class FeatureController < ApplicationController
 
   def destroy
     @redis = redis_connection
-    puts "------------------ #{params.inspect}"
     @redis.del("feature:#{params[:id]}:percentage")
     @redis.del("feature:#{params[:id]}:users")
 
