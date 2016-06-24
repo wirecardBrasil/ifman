@@ -18,7 +18,7 @@
     <% end %>
 
     <h4>Users</h4>
-    <%= form_tag add_feature_user_path(@feature), id: 'add-user-form',remote: true do %>
+    <%= form_tag add_feature_user_path(@feature), id: 'add-user-form', remote: true do %>
       <div class="form-group">
         <%= text_field_tag 'user', nil, class: 'form-control' %>
       </div>
@@ -30,6 +30,11 @@
         <% @users.each do |user| %>
           <tr>
             <td><%= user %></td>
+              <td>
+              <%= link_to delete_user_path(@feature, user), data: { confirm: 'Are you sure?' }, method: :delete, remote: true, class: "btn btn-danger pull-right delete-feature" do %>
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
