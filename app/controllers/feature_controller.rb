@@ -4,15 +4,21 @@ class FeatureController < ApplicationController
 
   end
 
-  def create feature
+  def create
     @redis = redis_connection
-    @redis.set("feature:#{feature}:percentage", 0)
+    @redis.set("feature:#{params[:feature]}:percentage", params[:percentage])
+    @redis.sadd("feature:#{params[:feature]}:users", params[:users]) if params[:users]
+
+    redirect_to controller: :dashboard, action: :index
   end
 
-  def delete feature
+  def destroy
     @redis = redis_connection
-    @redis.del("feature:#{feature}:percentage")
-    @redis.del("feature:#{feature}:users")
+    puts "------------------ #{params.inspect}"
+    @redis.del("feature:#{params[:id]}:percentage")
+    @redis.del("feature:#{params[:id]}:users")
+
+    redirect_to controller: :dashboard, action: :index
   end
 
 end

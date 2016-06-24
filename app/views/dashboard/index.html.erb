@@ -1,11 +1,16 @@
 <h1> Dashboard </h1>
 
+<div class="row-fluid">
+  <%= link_to "Create new Feature", new_feature_path, class: "btn btn-primary" %>
+</div>
+
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th>
        Features
       </th>
+      <th></th>
     </tr>
   </thead>
 
@@ -14,18 +19,14 @@
     <% @features.uniq.each do |feature| %>
       <tr>
         <td> <%=feature%> </td>
-      </tr>
-      <tr>
         <td>
-          <button type="button" class="btn btn-default btn-lg">
+          <%= link_to destroy_feature_path(feature), :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" do %>
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-          </button>
+          <% end %>
         </td>
       </tr>
     <% end %>
 
     </tbody>
-
-
 
 </table>
