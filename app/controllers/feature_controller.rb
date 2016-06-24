@@ -7,9 +7,9 @@ class FeatureController < ApplicationController
     @feature = params[:id]
 
     @redis = redis_connection
-    puts "======redisconnection#{@redis}"
+
     @percentage = @redis.get("feature:#{@feature}:percentage")
-    puts "====#{@redis.get("feature:entryScheduler:percentage")}"
+
     @users = @redis.smembers("feature:#{@feature}:users")
   end
 
@@ -27,6 +27,10 @@ class FeatureController < ApplicationController
     @redis.del("feature:#{params[:id]}:users")
 
     redirect_to controller: :dashboard, action: :index
+  end
+
+  def update
+    redis_connection.sadd("feature:#{params[:id]}:users")
   end
 
 end

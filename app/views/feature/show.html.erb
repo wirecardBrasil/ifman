@@ -1,10 +1,29 @@
 <h1> <%= @feature %> </h1>
 
-<h2>Percentage</h2>
+<%= form_tag('/update') do %>
 
-<div class="range">
-  <input type="range" name="range" min="1" max="100" value="<%= @percentage %>" onchange="range.value=value">
-  <output id="range"><%= @percentage %></output>
-</div>
+  <h2>Percentage</h2>
 
-<h2>Users</h2>
+  <div class="range">
+    <input type="range" name="range" min="1" max="100" value="<%= @percentage %>" onchange="range.value=value">
+    <output id="range"><%= @percentage %></output>
+  </div>
+
+  <h2>Users</h2>
+
+  <%= text_field_tag 'user' %>
+  <%= submit_tag 'Add' %>
+
+  <table class="table table-striped table-bordered">
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= user %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>
