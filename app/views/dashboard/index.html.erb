@@ -2,18 +2,28 @@
   <%= page_indicator "Dashboard" %>
 <% end%>
 
+<div class="row-fluid">
+  <%= link_to "Create new Feature", new_feature_path, class: "btn btn-primary" %>
+</div>
+
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th>
        Features
       </th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @features.uniq.each do |feature| %>
       <tr>
         <td> <%=feature%> </td>
+        <td>
+          <%= link_to destroy_feature_path(feature), :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" do %>
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
