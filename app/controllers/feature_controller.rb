@@ -1,6 +1,7 @@
 class FeatureController < ApplicationController
 
   def new
+    @percentage = 0
   end
 
   def show
