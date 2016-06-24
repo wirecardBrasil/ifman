@@ -5,8 +5,14 @@ class ApplicationController < ActionController::Base
   before_filter :connection_available?
 
   def redis_connection
-    @redis ||= Redis.new(url: "redis://:#{session[:password]}@#{session[:user]}")
-  rescue
+    begin
+      @redis ||= Redis.new(url: "redis://:#{session[:password]}@#{session[:user]}")
+      @redis.inspect
+    rescue
+      flash[:error] = "Connection to redis failed"
+      redirect_to controller: :login, action: :index
+    end
+    @redis
   end
 
   def connection_available?
