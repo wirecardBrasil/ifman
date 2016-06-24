@@ -4,4 +4,6 @@ Rails.application.routes.draw do
 
   resources :login
 
+  get '/dashboard', to: 'dashboard#index'
+
 end
