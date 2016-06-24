@@ -2,11 +2,16 @@ Rails.application.routes.draw do
 
   root to: 'login#index'
 
-  resources :login, :feature
+  resources :login
 
   get '/dashboard', to: 'dashboard#index'
-  delete '/feature/:feature', to: 'feature#destroy', as: 'destroy_feature'
-  post '/feature/:id', to: 'feature#add_user', as: 'add_feature_user'
-  put '/feature/:id', to: 'feature#update_percentage', as: 'update_feature_percentage'
+
+  scope '/feature' do
+    get '/new', to: 'feature#new', as: 'new_feature'
+    delete '/:feature', to: 'feature#destroy', as: 'destroy_feature'
+    get '/:id', to: 'feature#show', as: 'feature'
+    post '/:id', to: 'feature#add_user', as: 'add_feature_user'
+    put '/:id', to: 'feature#update_percentage', as: 'update_feature_percentage'
+  end
 
 end
