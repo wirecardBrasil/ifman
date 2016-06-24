@@ -1,6 +1,6 @@
 <h1> <%= @feature %> </h1>
 
-<%= form_tag update_feature_percentage_path(@feature), method: :put do %>
+<%= form_tag update_feature_percentage_path(@feature), method: :put, remote: true do %>
 
   <h2>Percentage</h2>
 
@@ -8,6 +8,8 @@
     <input type="range" name="range" min="1" max="100" value="<%= @percentage %>" onchange="range.value=value">
     <output id="range"><%= @percentage %></output>
   </div>
+
+  <%= submit_tag 'Save', class: 'btn btn-primary' %>
 
 <% end %>
 
