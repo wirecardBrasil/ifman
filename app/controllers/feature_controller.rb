@@ -1,7 +1,16 @@
 class FeatureController < ApplicationController
 
   def new
+  end
 
+  def show
+    @feature = params[:id]
+
+    @redis = redis_connection
+    puts "======redisconnection#{@redis}"
+    @percentage = @redis.get("feature:#{@feature}:percentage")
+    puts "====#{@redis.get("feature:entryScheduler:percentage")}"
+    @users = @redis.smembers("feature:#{@feature}:users")
   end
 
   def create
