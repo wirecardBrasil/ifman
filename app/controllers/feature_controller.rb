@@ -24,7 +24,7 @@ class FeatureController < ApplicationController
     @redis.del("feature:#{params[:id]}:percentage")
     @redis.del("feature:#{params[:id]}:users")
 
-    redirect_to controller: :dashboard, action: :index
+    render json: { feature: params[:id] }, status: 200
   end
 
   def add_user
