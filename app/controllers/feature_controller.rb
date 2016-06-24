@@ -1,7 +1,16 @@
 class FeatureController < ApplicationController
 
   def new
+  end
 
+  def show
+    @feature = params[:id]
+
+    @redis = redis_connection
+
+    @percentage = @redis.get("feature:#{@feature}:percentage")
+
+    @users = @redis.smembers("feature:#{@feature}:users")
   end
 
   def create
@@ -17,7 +26,11 @@ class FeatureController < ApplicationController
     @redis.del("feature:#{params[:id]}:percentage")
     @redis.del("feature:#{params[:id]}:users")
 
-    redirect_to controller: :dashboard, action: :index
+    render json: { feature: params[:id] }, status: 200
+  end
+
+  def update
+    redis_connection.sadd("feature:#{params[:id]}:users")
   end
 
 end

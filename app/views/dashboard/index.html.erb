@@ -10,8 +10,8 @@
   <table class="table table-striped">
     <tbody>
       <% @features.uniq.each do |feature| %>
-        <tr>
-          <td><%= feature %></td>
+        <tr id="<%= feature %>">
+          <td> <%= link_to "#{feature}", feature_path(feature) %> </td>
           <td>
             <%= link_to destroy_feature_path(feature), data: { confirm: 'Are you sure?' }, method: :delete, remote: true, class: "btn btn-danger pull-right delete-feature" do %>
               <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
