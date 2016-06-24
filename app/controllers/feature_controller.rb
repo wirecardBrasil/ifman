@@ -13,7 +13,7 @@ class FeatureController < ApplicationController
 
   def create
     if params[:feature].include? ":"
-      flash[:error] = "Features cannot contains \":\""
+      flash[:error] = "Features names cannot contains \":\""
       redirect_to controller: :feature, action: :new
     else
       redis_connection.set("feature:#{params[:feature]}:percentage", params[:percentage])

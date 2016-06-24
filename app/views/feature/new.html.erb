@@ -12,7 +12,7 @@
     </div>
   <% end %>
 
-  <h1> Create new feature </h1>
+  <h1> Create New Feature </h1>
 
   <div class="form-group">
     <%= label_tag 'Feature Name' %>
@@ -20,7 +20,7 @@
   </div>
 
   <%= label_tag 'percentage', "Percentage" %>
-  <div class="form-group">
+  <div class="form-group text-center">
     <%= text_field_tag 'percentage', nil, data: { "slider-min" => 0, "slider-max" => 100, "slider-step" => 1, "slider-value" => @percentage }, class: 'form-control' %>
     &nbsp;&nbsp;&nbsp;&nbsp;Current percentage: <span id="current-percentage"><%= @percentage || 0 %></span>%
   </div>
