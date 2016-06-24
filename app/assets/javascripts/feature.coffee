@@ -6,3 +6,10 @@ $ ->
   $("#add-user-form").on "ajax:success", (e, data, status, xhr) ->
     $("#users-content").append "<tr><td>#{data.user}</td></tr>"
     $("#user").val ""
+
+  $('#percentage').slider
+  	formatter: (value) ->
+  		return "Current value: #{value}"
+
+  $("#percentage").on "slide", (event) ->
+    $("#current-percentage").text event.value

@@ -10,10 +10,8 @@
 
     <h4>Percentage</h4>
     <%= form_tag update_feature_percentage_path(@feature), method: :put do %>
-      <div class="range">
-        <input type="range" name="range" min="1" max="100" value="<%= @percentage %>" onchange="range.value=value">
-        <output id="range"><%= @percentage %></output>
-      </div>
+      <%= text_field_tag :percentage, nil, data: { "slider-min" => 0, "slider-max" => 100, "slider-step" => 1, "slider-value" => @percentage } %>
+      Current percentage: <span id="current-percentage"><%= @percentage || 0 %></span>%
     <% end %>
 
     <h4>Users</h4>
