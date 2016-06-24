@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   scope '/feature' do
     post '/', to: 'feature#create', as: 'create_feature'
     get '/new', to: 'feature#new', as: 'new_feature'
-    delete '/:feature', to: 'feature#destroy', as: 'destroy_feature'
+    delete '/:id', to: 'feature#destroy', as: 'destroy_feature'
     get '/:id', to: 'feature#show', as: 'feature'
     post '/:id', to: 'feature#add_user', as: 'add_feature_user'
     put '/:id', to: 'feature#update_percentage', as: 'update_feature_percentage'
