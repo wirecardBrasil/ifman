@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  def init_redis(user, password)
-    @redis = Redis.new(:url => "redis://:#{password}@#{user}")
+  before_filter :redis_connection
+
+  def redis_connection
+    @redis ||= Redis.new(:url => "redis://:#{session[:password]}@#{session[:user]}")
   end
 
 end
