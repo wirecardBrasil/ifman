@@ -10,8 +10,10 @@
 
     <h4>Percentage</h4>
     <%= form_tag update_feature_percentage_path(@feature), method: :put, remote: true do %>
-      <%= text_field_tag :percentage, nil, data: { "slider-min" => 0, "slider-max" => 100, "slider-step" => 1, "slider-value" => @percentage } %>
-      Current percentage: <span id="current-percentage"><%= @percentage || 0 %></span>%
+      <div class="form-group">
+        <%= text_field_tag :percentage, nil, data: { "slider-min" => 0, "slider-max" => 100, "slider-step" => 1, "slider-value" => @percentage } %>
+        &nbsp;&nbsp;&nbsp;&nbsp;Current percentage: <span id="current-percentage"><%= @percentage || 0 %></span>%
+      </div>
       <%= submit_tag 'Save', class: 'btn btn-primary' %>
     <% end %>
 
