@@ -1,4 +1,6 @@
-<h1> Dashboard </h1>
+<% content_for :current_page do %>
+  <%= page_indicator "Dashboard" %>
+<% end%>
 
 <table class="table table-bordered table-striped">
   <thead>
@@ -8,17 +10,11 @@
       </th>
     </tr>
   </thead>
-
-    <tbody>
-
+  <tbody>
     <% @features.uniq.each do |feature| %>
       <tr>
         <td> <%=feature%> </td>
       </tr>
     <% end %>
-
-    </tbody>
-
-
-
+  </tbody>
 </table>
