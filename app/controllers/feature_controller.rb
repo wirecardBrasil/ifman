@@ -30,7 +30,7 @@ class FeatureController < ApplicationController
   def add_user
     redis_connection.sadd("feature:#{params[:id]}:users", params[:user])
 
-    render nothing: true, status: 200
+    render json: {user: params[:user]}, status: 200
   end
 
   def update_percentage

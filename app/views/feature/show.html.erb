@@ -1,37 +1,37 @@
-<h1> <%= @feature %> </h1>
+<% content_for :current_page do %>
+  <%= page_indicator "Feature #{@feature}" %>
+<% end%>
 
-<%= form_tag update_feature_percentage_path(@feature), method: :put, remote: true do %>
-
-  <h2>Percentage</h2>
-
-  <div class="range">
-    <input type="range" name="range" min="1" max="100" value="<%= @percentage %>" onchange="range.value=value">
-    <output id="range"><%= @percentage %></output>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3><%= @feature %></h3>
   </div>
+  <div class="panel-body">
 
-  <%= submit_tag 'Save', class: 'btn btn-primary' %>
+    <h4>Percentage</h4>
+    <%= form_tag update_feature_percentage_path(@feature), method: :put do %>
+      <div class="range">
+        <input type="range" name="range" min="1" max="100" value="<%= @percentage %>" onchange="range.value=value">
+        <output id="range"><%= @percentage %></output>
+      </div>
+    <% end %>
 
-<% end %>
+    <h4>Users</h4>
+    <%= form_tag add_feature_user_path(@feature), id: 'add-user-form',remote: true do %>
+      <div class="form-group">
+        <%= text_field_tag 'user', nil, class: 'form-control' %>
+      </div>
+      <%= submit_tag 'Add', class: 'btn btn-primary' %>
+    <% end %>
 
-<%= form_tag add_feature_user_path(@feature), remote: true do %>
-
-  <h2>Users</h2>
-
-  <div class="form-group">
-    <%= text_field_tag 'user', nil, class: 'form-control' %>
-    <%= submit_tag 'Add', class: 'btn btn-primary' %>
+    <table class="table table-striped table-bordered form-table">
+      <tbody id="users-content">
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-
-  <table class="table table-striped table-bordered">
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td>
-            <%= user %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-<% end %>
+</div>
