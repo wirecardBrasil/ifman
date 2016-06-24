@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get '/:id', to: 'feature#show', as: 'feature'
     post '/:id', to: 'feature#add_user', as: 'add_feature_user'
     put '/:id', to: 'feature#update_percentage', as: 'update_feature_percentage'
+    delete '/:id/user/:user', to: 'feature#delete_user', as: 'delete_user'
   end
 
 end

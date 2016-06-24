@@ -29,6 +29,11 @@ class FeatureController < ApplicationController
     render json: {user: params[:user]}, status: 200
   end
 
+  def delete_user
+    redis_connection.srem("feature:#{params[:id]}:users", params[:user])
+    render :nothing, status: 200
+  end
+
   def update_percentage
     redis_connection.set("feature:#{params[:id]}:percentage", params[:range])
   end
