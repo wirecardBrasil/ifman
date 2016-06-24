@@ -1,10 +1,15 @@
 <%= form_tag('/login') do%>
 
-  <%= label_tag 'user' %>
-  <%= text_field_tag 'user' %>
-  <%= label_tag 'password' %>
-  <%= password_field_tag 'password' %>
+  <div class="form-group">
+    <%= label_tag 'user' %>
+    <%= text_field_tag 'user', nil, class: 'form-control' %>
+  </div>
 
-  <%= submit_tag 'login' %>
+  <div class="form-group">
+    <%= label_tag 'password' %>
+    <%= password_field_tag 'password', nil, class: 'form-control' %>
+  </div>
+
+  <%= submit_tag 'Login', class: 'btn btn-primary' %>
 
 <% end %>
