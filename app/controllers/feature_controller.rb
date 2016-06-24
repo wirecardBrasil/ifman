@@ -7,9 +7,7 @@ class FeatureController < ApplicationController
     @feature = params[:id]
 
     @redis = redis_connection
-
     @percentage = @redis.get("feature:#{@feature}:percentage")
-
     @users = @redis.smembers("feature:#{@feature}:users")
   end
 
@@ -29,8 +27,17 @@ class FeatureController < ApplicationController
     redirect_to controller: :dashboard, action: :index
   end
 
-  def update
-    redis_connection.sadd("feature:#{params[:id]}:users")
+  def add_user
+    puts "PARAMS ===============================> #{params.inspect}"
+    puts "----------------------------- add_users #{params[:id]}"
+
+    redis_connection.sadd("feature:#{params[:id]}:users", params[:user])
+
+    render nothing: true, status: 200
+  end
+
+  def update_percentage
+    puts "-----------------------------  update_percentage params[:id]"
   end
 
 end

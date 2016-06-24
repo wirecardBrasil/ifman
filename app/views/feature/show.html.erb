@@ -1,6 +1,6 @@
 <h1> <%= @feature %> </h1>
 
-<%= form_tag('/update') do %>
+<%= form_tag update_feature_percentage_path(@feature), method: :put do %>
 
   <h2>Percentage</h2>
 
@@ -9,10 +9,16 @@
     <output id="range"><%= @percentage %></output>
   </div>
 
+<% end %>
+
+<%= form_tag add_feature_user_path(@feature), remote: true do %>
+
   <h2>Users</h2>
 
-  <%= text_field_tag 'user' %>
-  <%= submit_tag 'Add' %>
+  <div class="form-group">
+    <%= text_field_tag 'user', nil, class: 'form-control' %>
+    <%= submit_tag 'Add', class: 'btn btn-primary' %>
+  </div>
 
   <table class="table table-striped table-bordered">
     <tbody>
