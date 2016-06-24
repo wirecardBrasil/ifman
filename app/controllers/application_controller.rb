@@ -4,7 +4,12 @@ class ApplicationController < ActionController::Base
   before_filter :redis_connection
 
   def redis_connection
-    @redis ||= Redis.new(:url => "redis://:#{session[:password]}@#{session[:user]}")
+    if @redis
+      @redis = Redis.new(:url => "redis://:#{session[:password]}@#{session[:user]}")
+    else
+      flash[:error] = "Please, connect to redis"
+      redirect_to controller: :login, action: :index
+    end
   end
 
 end

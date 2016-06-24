@@ -34,7 +34,6 @@ class FeatureController < ApplicationController
   end
 
   def update_percentage
-    puts "-----------------------------  update_percentage #{params[:id]}"
     redis_connection.set("feature:#{params[:id]}:percentage", params[:range])
   end
 
