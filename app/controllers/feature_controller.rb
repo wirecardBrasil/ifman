@@ -12,10 +12,15 @@ class FeatureController < ApplicationController
   end
 
   def create
-    redis_connection.set("feature:#{params[:feature]}:percentage", params[:percentage])
-    redis_connection.sadd("feature:#{params[:feature]}:users", params[:users]) if params[:users]
+    if params[:feature].include? ":"
+      flash[:error] = "Features cannot contains \":\""
+      redirect_to controller: :feature, action: :new
+    else
+      redis_connection.set("feature:#{params[:feature]}:percentage", params[:percentage])
+      redis_connection.sadd("feature:#{params[:feature]}:users", params[:users]) if params[:users]
 
-    redirect_to controller: :dashboard, action: :index
+      redirect_to controller: :dashboard, action: :index
+    end
   end
 
   def destroy

@@ -4,11 +4,19 @@
 
 <%= form_tag create_feature_path do%>
 
+  <% if flash[:error] %>
+    <div class="alert alert-danger" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
   <h1> Create new feature </h1>
 
   <div class="form-group">
     <%= label_tag 'Feature Name' %>
-    <%= text_field_tag 'feature', nil, class: 'form-control' %>
+    <%= text_field_tag 'feature', nil, class: 'form-control', required: true %>
   </div>
 
   <%= label_tag 'percentage', "Percentage" %>
