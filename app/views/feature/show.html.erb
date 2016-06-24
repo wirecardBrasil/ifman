@@ -28,10 +28,10 @@
     <table class="table table-striped form-table">
       <tbody id="users-content">
         <% @users.each do |user| %>
-          <tr>
+          <tr id="<%= user %>">
             <td><%= user %></td>
               <td>
-              <%= link_to delete_user_path(@feature, user), data: { confirm: 'Are you sure?' }, method: :delete, remote: true, class: "btn btn-danger pull-right delete-feature" do %>
+              <%= link_to delete_user_path(@feature, user), data: { confirm: 'Are you sure?' }, method: :delete, remote: true, class: "btn btn-danger pull-right delete-user" do %>
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
               <% end %>
             </td>

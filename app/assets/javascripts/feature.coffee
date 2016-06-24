@@ -4,7 +4,7 @@
 
 $ ->
   $("#add-user-form").on "ajax:success", (e, data, status, xhr) ->
-    $("#users-content").append "<tr><td>#{data.user}</td></tr>"
+    $("#users-content").append "<tr><td>#{data.user}</td><td><a data-confirm='Are you sure?' class='btn btn-danger pull-right delete-user' data-remote='true' rel='nofollow' data-method='delete' href='/feature/#{data.feature}/user/#{data.user}'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a></td></tr>"
     $("#user").val ""
 
   $('#percentage').slider
@@ -13,3 +13,6 @@ $ ->
 
   $("#percentage").on "slide", (event) ->
     $("#current-percentage").text event.value
+
+  $(".delete-user").on "ajax:success", (e, data, status, xhr) ->
+    $("##{data.user}").remove()
