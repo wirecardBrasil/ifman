@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboard#index'
 
   scope '/feature' do
+    post '/', to: 'feature#create', as: 'create_feature'
     get '/new', to: 'feature#new', as: 'new_feature'
     delete '/:feature', to: 'feature#destroy', as: 'destroy_feature'
     get '/:id', to: 'feature#show', as: 'feature'
