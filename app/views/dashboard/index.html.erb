@@ -1,1 +1,22 @@
 <h1> Dashboard </h1>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <th>
+     Features
+    </th>
+  </thead>
+
+    <tbody>
+
+    <% @features.uniq.each do |feature| %>
+      <tr>
+        <td> <%=feature%> </td>
+      </tr>
+    <% end %>
+
+    </tbody>
+
+
+
+</table>
