@@ -1,5 +1,8 @@
 <div class="col-md-10">
-  <%= form_tag('/login') do%>
+
+  <%= image_tag("ifman", class: "center-block") %>
+
+  <%= form_tag('/login') do %>
 
     <% if flash[:error] %>
       <div class="alert alert-danger" role="alert">
