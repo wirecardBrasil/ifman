@@ -35,38 +35,41 @@
   </head>
   <body>
 
-    <div class="navbar navbar-default navbar-static-top">
+    <main class="section no-pad-bot">
       <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Ifman <%= content_for?(:current_page) ? yield(:current_page) : "" %></a>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
-            <!-- incluir links uteis aqui -->
-          </ul>
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-6">
+            <%= yield %>
+          </div>
+          <div class="col-md-3">
+          </div>
         </div>
       </div>
-    </div>
+    </main>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-
-        </div>
-        <div class="col-md-6">
-          <%= yield %>
-        </div>
-        <div class="col-md-3">
-        </div><!--/span-->
-      </div><!--/row-->
-    </div> <!-- /container -->
-
-    <footer class="footer">
+    <footer class="page-footer">
       <div class="container">
-        <p class="text-muted">&copy; Moip 2016</p>
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">IfMan</h5>
+            <p class="grey-text text-lighten-4">Use this Super-Hero to manage your features. IfMan works togheter with Curtain.</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Checkout Curtain for</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="http://github.com/moip/jcurtain">Java</a></li>
+              <li><a class="grey-text text-lighten-3" href="http://github.com/moip/rcurtain">Ruby</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        &copy; Moip 2016
+        <a class="grey-text text-lighten-4 right" href="http://moip.com.br">Moip</a>
+        </div>
       </div>
     </footer>
 

@@ -1,5 +1,6 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "bootstrap-slider.min";
+@import "materialize/components/color";
+$primary-color: color("blue", "lighten-2") !default;
+@import "materialize";
+@import "materialize/extras/nouislider";
 
 @import "*"
