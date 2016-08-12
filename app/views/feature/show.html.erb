@@ -2,30 +2,30 @@
   <%= page_indicator "Feature #{@feature}" %>
 <% end%>
 
-<h5 class="header blue-text"><%= @feature %></h5>
+<h5 class="header deep-purple-text"><%= @feature %></h5>
 
 <div class="col s12">
   <%= form_tag update_feature_percentage_path(@feature), method: :put, remote: true do %>
-    <h5 class="header blue-text">Percentage</h5>
+    <h5 class="header blue-text"><i class="material-icons">insert_chart</i> Percentage</h5>
     <div class="col s10">
       <p class="range-field">
         <input type="range" id="percentage" min="0" max="100" value="<%= @percentage %>"/>
       </p>
     </div>
     <div class="col s2">
-      <%= submit_tag 'Save', class: 'btn' %>
+      <%= submit_tag 'Save', class: 'btn deep-purple' %>
     </div>
   <% end %>
 </div>
 
 <div class="col s12">
   <%= form_tag add_feature_user_path(@feature), id: 'add-user-form', remote: true do %>
-    <h5 class="header blue-text">Users</h5>
+    <h5 class="header blue-text"><i class="material-icons">supervisor_account</i> Users</h5>
     <div class="col s10">
         <%= text_field_tag 'user', nil %>
     </div>
     <div class="col s2">
-      <%= submit_tag 'Add', class: 'btn' %>
+      <%= submit_tag 'Add', class: 'btn deep-purple' %>
     </div>
   <% end %>
 </div>
