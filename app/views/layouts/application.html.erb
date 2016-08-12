@@ -44,9 +44,10 @@
       <nav>
         <div class="nav-wrapper container">
           <div class="col s12">
-            <a href="/" class="breadcrumb">IFMAN</a>
+            <a href="/dashboard" class="breadcrumb">IFMAN</a>
             <% if content_for?(:current_page) %>
               <a href="#!" class="breadcrumb"><%= content_for?(:current_page) ? yield(:current_page) : "" %></a>
+              <a href="/" class="breadcumb right"><i class="material-icons">power_settings_new</i></a>
             <% end %>
           </div>
         </div>
