@@ -2,23 +2,26 @@
   <%= page_indicator "Dashboard" %>
 <% end%>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title col-md-10">List of Features</h3>
-    <%= link_to "New Feature", new_feature_path, class: "btn btn-primary btn-xs" %>
+<div class="container">
+  <div class="row">
+    <h5 class="header blue-text"> Your Features </h5>
   </div>
-  <table class="table table-striped">
-    <tbody>
-      <% @features.uniq.each do |feature| %>
-        <tr id="<%= feature %>">
-          <td> <%= link_to "#{feature}", feature_path(feature) %> </td>
-          <td>
-            <%= link_to destroy_feature_path(feature), data: { confirm: 'Are you sure?' }, method: :delete, remote: true, class: "btn btn-danger pull-right delete-feature" do %>
-              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="row">
+    <div class="collection">
+    <% @features.uniq.each do |feature| %>
+      <%= link_to "#{feature}", feature_path(feature), class: "collection-item" %>
+      <!-- <tr id="<%= feature %>">
+        <td>  </td>
+        <td>
+          <%= link_to destroy_feature_path(feature), data: { confirm: 'Are you sure?' }, method: :delete, remote: true, class: "btn btn-danger pull-right delete-feature" do %>
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          <% end %>
+        </td>
+      </tr> -->
+    <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <%= link_to ("<i class=\"material-icons\">add</i>").html_safe, new_feature_path, class: "btn-floating waves-effect waves-light red right-align right" %>
+  </div>
 </div>
