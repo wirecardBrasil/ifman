@@ -2,26 +2,19 @@
   <%= page_indicator "Dashboard" %>
 <% end%>
 
-<div class="container">
-  <div class="row">
-    <h5 class="header blue-text"> Your Features </h5>
-  </div>
-  <div class="row">
-    <div class="collection">
+<div class="row">
+  <h5 class="header blue-text"> Your Features </h5>
+</div>
+<div class="row">
+  <div class="collection">
     <% @features.uniq.each do |feature| %>
+      <%= link_to destroy_feature_path(feature), data: { confirm: 'Are you sure?' }, method: :delete, remote: true, class: "btn-flat waves-effect waves-light right teal-text" do %>
+        <i class="material-icons">delete</i>
+      <% end %>
       <%= link_to "#{feature}", feature_path(feature), class: "collection-item" %>
-      <!-- <tr id="<%= feature %>">
-        <td>  </td>
-        <td>
-          <%= link_to destroy_feature_path(feature), data: { confirm: 'Are you sure?' }, method: :delete, remote: true, class: "btn btn-danger pull-right delete-feature" do %>
-            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-          <% end %>
-        </td>
-      </tr> -->
     <% end %>
-    </div>
   </div>
-  <div class="row">
-    <%= link_to ("<i class=\"material-icons\">add</i>").html_safe, new_feature_path, class: "btn-floating waves-effect waves-light red right-align right" %>
-  </div>
+</div>
+<div class="row">
+  <%= link_to ("<i class=\"material-icons\">add</i>").html_safe, new_feature_path, class: "btn-floating waves-effect waves-light red right-align right" %>
 </div>
