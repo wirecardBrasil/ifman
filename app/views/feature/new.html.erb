@@ -22,10 +22,19 @@
   </div>
 
   <%= label_tag 'percentage', "Percentage" %>
-  <div class="input-field">
-    <p class="range-field">
-      <%= range_field_tag 'percentage', 100, min: 0, max: 100 %>
-    </p>
+  <div class="row">
+    <div class="col s11">
+      <div class="input-field">
+        <p class="range-field">
+          <input type="range" id="percentage" name="percentage" min="0" max="100" onchange="range.value=value"/>
+        </p>
+      </div>
+    </div>
+    <div class="col s1">
+      <div class="chip">
+        <output id="range"> 50 </output>
+      </div>
+    </div>
   </div>
 
   <div class="input-field">
