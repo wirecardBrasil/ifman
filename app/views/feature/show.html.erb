@@ -2,18 +2,23 @@
   <%= page_indicator "Feature #{@feature}" %>
 <% end%>
 
-<h5 class="header deep-purple-text"><%= @feature %></h5>
+<h5 class="header deep-purple-text" id="feature"><%= @feature %></h5>
 
 <div class="col s12">
   <%= form_tag update_feature_percentage_path(@feature), method: :put, remote: true do %>
     <h5 class="header blue-text"><i class="material-icons">insert_chart</i> Percentage</h5>
-    <div class="col s10">
+    <div class="col s9">
       <p class="range-field">
-        <input type="range" id="percentage" min="0" max="100" value="<%= @percentage %>"/>
+        <input type="range" id="percentage" min="0" max="100" value="<%= @percentage %>" onchange="range.value=value"/>
       </p>
     </div>
+    <div class="col s1">
+      <div class="chip">
+        <output id="range"> <%= @percentage %> </output>
+      </div>
+    </div>
     <div class="col s2">
-      <%= submit_tag 'Save', class: 'btn deep-purple' %>
+      <%= submit_tag 'save', class: 'btn deep-purple', id: 'update-percentage' %>
     </div>
   <% end %>
 </div>
@@ -25,7 +30,7 @@
         <%= text_field_tag 'user', nil %>
     </div>
     <div class="col s2">
-      <%= submit_tag 'Add', class: 'btn deep-purple' %>
+      <%= submit_tag 'add', class: 'btn deep-purple', id: 'add-user' %>
     </div>
   <% end %>
 </div>
@@ -33,7 +38,8 @@
 <div class="col s12">
   <% @users.each do |user| %>
     <div class="chip">
-      <%= user %><i class="close material-icons">close</i>
+      <span class="user"><%= user %></span>
+      <i class="close material-icons delete-user">close</i>
     </div>
   <% end %>
 </div>

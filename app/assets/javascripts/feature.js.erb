@@ -1,0 +1,21 @@
+(function(){
+
+  $(".delete-user").click(function(){
+    feature = $('#feature').text();
+    user = $(this).closest('.chip').find('.user').text();
+
+    $.ajax({
+      type: "DELETE",
+      url: "/feature/" + feature + "/user/" + user,
+      success: function (data) {
+        console.log("User deleted!");
+        console.log(data);
+      },
+      error: function (data) {
+        console.log("Whops... Something went wrong!")
+        console.log(data);
+      }
+    });
+  });
+
+})();
