@@ -8,7 +8,7 @@ Checkout about Curtain, an easy way to control your features using [redis](http:
 
 ## Usage
 
-* To use **IfMan**, first your need to initialize the configuration defining your **redis URL** as Login and **redis password** as Password.
+* To use **IfMan**, first your need to initialize the configuration defining your **redis URI** as Login and **redis password** as Password.
 
 ```
 Login:    10.0.1.1:6380
