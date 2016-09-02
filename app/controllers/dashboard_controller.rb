@@ -9,6 +9,8 @@ class DashboardController < ApplicationController
       @features << /feature:(.+):.*/.match(feature)[1]
     end
 
+    @features.sort! if @features.length > 0
+
   end
 
 end

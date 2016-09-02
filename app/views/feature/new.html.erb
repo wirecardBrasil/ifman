@@ -12,24 +12,38 @@
     </div>
   <% end %>
 
-  <h1> Create New Feature </h1>
+  <h5 class="header deep-purple-text"><i class="material-icons">playlist_add</i> Create New Feature </h5>
 
-  <div class="form-group">
+  <br>
+
+  <div class="input-field">
     <%= label_tag 'Feature Name' %>
-    <%= text_field_tag 'feature', nil, class: 'form-control', required: true %>
+    <%= text_field_tag 'feature', nil, required: true %>
   </div>
 
   <%= label_tag 'percentage', "Percentage" %>
-  <div class="form-group text-center">
-    <%= text_field_tag 'percentage', nil, data: { "slider-min" => 0, "slider-max" => 100, "slider-step" => 1, "slider-value" => @percentage }, class: 'form-control' %>
-    &nbsp;&nbsp;&nbsp;&nbsp;Current percentage: <span id="current-percentage"><%= @percentage || 0 %></span>%
+  <div class="row">
+    <div class="col s11">
+      <div class="input-field">
+        <p class="range-field">
+          <input type="range" id="percentage" name="percentage" min="0" max="100" onchange="range.value=value"/>
+        </p>
+      </div>
+    </div>
+    <div class="col s1">
+      <div class="chip">
+        <output id="range"> 50 </output>
+      </div>
+    </div>
   </div>
 
-  <div class="form-group">
+  <div class="input-field">
     <%= label_tag 'Users' %>
-    <%= text_field_tag 'users', nil, class: 'form-control' %>
+    <%= text_field_tag 'users', nil %>
   </div>
 
-  <%= submit_tag 'Create', class: 'btn btn-primary' %>
+  <br>
+
+  <%= submit_tag 'Create', class: 'btn right deep-purple' %>
 
 <% end %>

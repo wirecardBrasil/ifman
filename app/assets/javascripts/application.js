@@ -12,6 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets
-//= require bootstrap-slider.min
+//= require materialize-sprockets
+//= require materialize/extras/nouislider
 //= require_tree .

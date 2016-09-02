@@ -17,7 +17,7 @@ class FeatureController < ApplicationController
       redirect_to controller: :feature, action: :new
     else
       redis_connection.set("feature:#{params[:feature]}:percentage", params[:percentage])
-      redis_connection.sadd("feature:#{params[:feature]}:users", params[:users]) if params[:users]
+      redis_connection.sadd("feature:#{params[:feature]}:users", params[:users]) if params[:users].length > 0
 
       redirect_to controller: :dashboard, action: :index
     end
@@ -26,13 +26,16 @@ class FeatureController < ApplicationController
   def destroy
     redis_connection.del("feature:#{params[:id]}:percentage")
     redis_connection.del("feature:#{params[:id]}:users")
-
-    render json: { feature: params[:id] }, status: 200
+    respond_to do |format|
+      format.js {render inline: "location.reload();" }
+    end
   end
 
   def add_user
     redis_connection.sadd("feature:#{params[:id]}:users", params[:user])
-    render json: {user: params[:user], feature: params[:id]}, status: 200
+    respond_to do |format|
+      format.js {render inline: "location.reload();" }
+    end
   end
 
   def delete_user
@@ -42,6 +45,9 @@ class FeatureController < ApplicationController
 
   def update_percentage
     redis_connection.set("feature:#{params[:id]}:percentage", params[:percentage])
+    respond_to do |format|
+      format.js {render inline: "location.reload();" }
+    end
   end
 
 end

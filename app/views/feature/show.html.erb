@@ -2,42 +2,44 @@
   <%= page_indicator "Feature #{@feature}" %>
 <% end%>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3><%= @feature %></h3>
-  </div>
-  <div class="panel-body">
+<h5 class="header deep-purple-text" id="feature"><%= @feature %></h5>
 
-    <h4>Percentage</h4>
-    <%= form_tag update_feature_percentage_path(@feature), method: :put, remote: true do %>
-      <div class="form-group text-left">
-        <%= text_field_tag :percentage, nil, data: { "slider-min" => 0, "slider-max" => 100, "slider-step" => 1, "slider-value" => @percentage } %>
-        &nbsp;&nbsp;&nbsp;&nbsp;Current percentage: <strong><span id="current-percentage"><%= @percentage || 0 %></span>%</strong>
+<div class="col s12">
+  <%= form_tag update_feature_percentage_path(@feature), method: :put, remote: true do %>
+    <h5 class="header blue-text"><i class="material-icons">insert_chart</i> Percentage</h5>
+    <div class="col s9">
+      <p class="range-field">
+        <input type="range" id="percentage" name="percentage" min="0" max="100" value="<%= @percentage %>" onchange="range.value=value"/>
+      </p>
+    </div>
+    <div class="col s1">
+      <div class="chip">
+        <output id="range"> <%= @percentage %> </output>
       </div>
-      <%= submit_tag 'Save', class: 'btn btn-primary' %>
-    <% end %>
+    </div>
+    <div class="col s2">
+      <%= submit_tag 'save', class: 'btn deep-purple', id: 'update-percentage' %>
+    </div>
+  <% end %>
+</div>
 
-    <h4>Users</h4>
-    <%= form_tag add_feature_user_path(@feature), id: 'add-user-form', remote: true do %>
-      <div class="form-group">
-        <%= text_field_tag 'user', nil, class: 'form-control' %>
-      </div>
-      <%= submit_tag 'Add', class: 'btn btn-primary' %>
-    <% end %>
+<div class="col s12">
+  <%= form_tag add_feature_user_path(@feature), id: 'add-user-form', remote: true do %>
+    <h5 class="header blue-text"><i class="material-icons">supervisor_account</i> Users</h5>
+    <div class="col s10">
+        <%= text_field_tag 'user', nil %>
+    </div>
+    <div class="col s2">
+      <%= submit_tag 'add', class: 'btn deep-purple', id: 'add-user' %>
+    </div>
+  <% end %>
+</div>
 
-    <table class="table table-striped form-table">
-      <tbody id="users-content">
-        <% @users.each do |user| %>
-          <tr id="<%= user %>">
-            <td><%= user %></td>
-              <td>
-              <%= link_to delete_user_path(@feature, user), data: { confirm: 'Are you sure?' }, method: :delete, remote: true, class: "btn btn-danger pull-right delete-user" do %>
-                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+<div class="col s12">
+  <% @users.each do |user| %>
+    <div class="chip">
+      <span class="user"><%= user %></span>
+      <i class="close material-icons delete-user">close</i>
+    </div>
+  <% end %>
 </div>
