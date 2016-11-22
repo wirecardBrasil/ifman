@@ -1,4 +1,4 @@
-# IfMan
+# ![IfMan](https://raw.githubusercontent.com/moip/ifman/master/app/assets/images/ifman.png)
 
 **IfMan** is a GUI (Graphical User Interface) for **Curtain**.
 
