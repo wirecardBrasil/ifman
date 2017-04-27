@@ -4,7 +4,7 @@
 
 Checkout about Curtain, an easy way to control your features using [redis](http://redis.io/), available for
 - Java as [JCurtain](https://github.com/moip/jcurtain).
-- Ruby as [RCurtain](https://github.com/moip/jcurtain).
+- Ruby as [RCurtain](https://github.com/moip/rcurtain).
 
 ## Usage
 
