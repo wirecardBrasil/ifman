@@ -11,6 +11,12 @@ Checkout about Curtain, an easy way to control your features using [redis](http:
 IfMan uses Redis to control it's features. You can run IfMan with Redis locally using [docker](https://docs.docker.com/engine/installation/).
 - `docker-compose up --build`
 
+The default login for docker is:
+```
+Login:    redis
+Password: redis
+```
+
 ## Usage
 
 * To use **IfMan**, first your need to initialize the configuration defining your **redis URI** as Login and **redis password** as Password.
