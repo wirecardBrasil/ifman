@@ -6,9 +6,9 @@ class FeatureController < ApplicationController
 
   def show
     @feature = params[:id]
-
     @percentage = redis_connection.get("feature:#{@feature}:percentage")
-    @users = redis_connection.smembers("feature:#{@feature}:users")
+    @cardinality = redis_connection.scard("feature:#{@feature}:users")
+    @users = redis_connection.smembers("feature:#{@feature}:users") unless @cardinality > 20
   end
 
   def create
@@ -35,6 +35,15 @@ class FeatureController < ApplicationController
     redis_connection.sadd("feature:#{params[:id]}:users", params[:user])
     respond_to do |format|
       format.js {render inline: "location.reload();" }
+    end
+  end
+
+  def search_user
+    sismember = redis_connection.sismember("feature:#{params[:id]}:users", params[:user])
+    if sismember
+      render nothing: true, status: 200
+    else
+      render nothing: true, status: 404
     end
   end
 
