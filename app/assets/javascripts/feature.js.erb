@@ -1,19 +1,41 @@
+var removal = function(e){
+  feature = $('#feature').text();
+  user = $(e).closest('.chip').find('.user').text();
+
+  $.ajax({
+    type: "DELETE",
+    url: "/feature/" + feature + "/user/" + user,
+    success: function (data) {
+      console.log("User deleted!");
+      console.log(data);
+    },
+    error: function (data) {
+      console.log("Whops... Something went wrong!")
+      console.log(data);
+    }
+  });
+};
+
 (function(){
 
-  $(".delete-user").click(function(){
+  $("#search-user").click(function(){
     feature = $('#feature').text();
-    user = $(this).closest('.chip').find('.user').text();
+    user = $('#search').val();
 
     $.ajax({
-      type: "DELETE",
+      type: "GET",
       url: "/feature/" + feature + "/user/" + user,
       success: function (data) {
-        console.log("User deleted!");
-        console.log(data);
+        console.log("User found!");
+        $('#user-list').html(
+            "<div class=\"chip\"><span class=\"user\">" +
+            user +
+            "</span><i class=\"close material-icons delete-user\" onclick='removal(this)'>close</i></div>"
+        );
       },
       error: function (data) {
-        console.log("Whops... Something went wrong!")
-        console.log(data);
+        console.log("User not found!");
+        $('#user-list').html("<div class=\"chip\">User not found</div>");
       }
     });
   });
