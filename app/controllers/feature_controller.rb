@@ -17,7 +17,7 @@ class FeatureController < ApplicationController
       redirect_to controller: :feature, action: :new
     else
       redis_connection.set("feature:#{params[:feature]}:percentage", params[:percentage])
-      redis_connection.sadd("feature:#{params[:feature]}:users", params[:users].strip!) if params[:users].length > 0
+      redis_connection.sadd("feature:#{params[:feature]}:users", params[:users].strip) if params[:users].length > 0
 
       redirect_to controller: :dashboard, action: :index
     end
@@ -32,7 +32,7 @@ class FeatureController < ApplicationController
   end
 
   def add_user
-    redis_connection.sadd("feature:#{params[:id]}:users", params[:user].strip!)
+    redis_connection.sadd("feature:#{params[:id]}:users", params[:user].strip)
     respond_to do |format|
       format.js {render inline: "location.reload();" }
     end
