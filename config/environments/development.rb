@@ -1,4 +1,6 @@
 Rails.application.configure do
+  config.web_console.whitelisted_ips = '0.0.0.0/0'
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -21,6 +23,8 @@ Rails.application.configure do
 
   # Raise an error on page load if there are pending migrations.
   # config.active_record.migration_error = :page_load
+
+  config.log_level = :debug
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
