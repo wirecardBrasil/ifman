@@ -1,5 +1,9 @@
 class FeatureController < ApplicationController
 
+  def list
+    @feature = params[:id]
+  end
+
   def new
     @percentage = 0
   end
@@ -7,8 +11,6 @@ class FeatureController < ApplicationController
   def show
     @feature = params[:id]
     @percentage = redis_connection.get("feature:#{@feature}:percentage")
-    @cardinality = redis_connection.scard("feature:#{@feature}:users")
-    @users = redis_connection.smembers("feature:#{@feature}:users") unless @cardinality > 20
   end
 
   def create
@@ -23,16 +25,22 @@ class FeatureController < ApplicationController
     end
   end
 
-  def destroy
-    redis_connection.del("feature:#{params[:id]}:percentage")
-    redis_connection.del("feature:#{params[:id]}:users")
+  def add_user
+    redis_connection.sadd("feature:#{params[:id]}:users", params[:user].strip)
+    flash.notice = "Added user #{params[:user].strip}"
     respond_to do |format|
       format.js {render inline: "location.reload();" }
     end
   end
 
-  def add_user
-    redis_connection.sadd("feature:#{params[:id]}:users", params[:user].strip)
+  def delete_user
+    redis_connection.srem("feature:#{params[:id]}:users", params[:user])
+    render json: {user: params[:user]}, status: 200
+  end
+
+  def destroy
+    redis_connection.del("feature:#{params[:id]}:percentage")
+    redis_connection.del("feature:#{params[:id]}:users")
     respond_to do |format|
       format.js {render inline: "location.reload();" }
     end
@@ -45,11 +53,6 @@ class FeatureController < ApplicationController
     else
       render nothing: true, status: 404
     end
-  end
-
-  def delete_user
-    redis_connection.srem("feature:#{params[:id]}:users", params[:user])
-    render json: {user: params[:user]}, status: 200
   end
 
   def update_percentage

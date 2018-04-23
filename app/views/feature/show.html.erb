@@ -31,46 +31,14 @@
     </div>
     <div class="col s2">
       <%= submit_tag 'add', class: 'btn deep-purple', id: 'add-user' %>
+      <%= link_to "View Users", feature_list_path(@feature), class: "collection-item blue-text" %>
     </div>
   <% end %>
 </div>
 
-<% if @cardinality > 20 %>
-  <div class="row">
-    <div class="col s12">
-      <div class='card'>
-        <div class='card-content deep-purple lighten-1'>
-          <p class="white-text">
-            <i class="material-icons">error</i>
-            Ops... this feature has <b><%= @cardinality %></b> users.
-            For better experience, please search for a specific user.
-          </p>
-        </div>
-        <div class='card-action'>
-          <div class="row">
-            <h5 class="header blue-text"><i class="material-icons">search</i> Search Users</h5>
-            <div class="col s10">
-              <%= text_field_tag 'search', nil %>
-            </div>
-            <div class="col s2">
-              <a class="btn deep-purple" id="search-user">search</a>
-            </div>
-
-            <div class="col s12" id='user-list'>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<% else %>
-  <div class="col s12">
-    <% @users.each do |user| %>
-      <div class="chip">
-        <span class="user"><%= user %></span>
-        <i class="close material-icons delete-user" onclick="removal(this)">close</i>
-      </div>
-    <% end %>
+<% if flash[:notice] %>
+  <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <%= flash.notice() %>
   </div>
 <% end %>
