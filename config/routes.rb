@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     post '/:id', to: 'feature#add_user', as: 'add_feature_user'
     put '/:id', to: 'feature#update_percentage', as: 'update_feature_percentage'
     get '/:id/user/:user', to: 'feature#search_user', as: 'search_user'
-    get '/:id/list', to: 'feature#list', as: 'feature_list'
+    get '/:id/search', to: 'feature#search', as: 'feature_search'
     delete '/:id/user/:user', to: 'feature#delete_user', as: 'delete_user'
   end
 end

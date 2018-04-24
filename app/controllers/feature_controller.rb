@@ -1,6 +1,6 @@
 class FeatureController < ApplicationController
 
-  def list
+  def search
     @feature = params[:id]
   end
 
@@ -18,16 +18,14 @@ class FeatureController < ApplicationController
       flash[:error] = "Features names cannot contains \":\""
       redirect_to controller: :feature, action: :new
     else
-      redis_connection.set("feature:#{params[:feature]}:percentage", params[:percentage])
-      redis_connection.sadd("feature:#{params[:feature]}:users", params[:users].strip) if params[:users].length > 0
-
+      redis_connection.set("feature:#{params[:feature]}:percentage", 50)
       redirect_to controller: :dashboard, action: :index
     end
   end
 
   def add_user
     redis_connection.sadd("feature:#{params[:id]}:users", params[:user].strip)
-    flash.notice = "Added user #{params[:user].strip}"
+    flash.notice = "Added user '#{params[:user].strip}'"
     respond_to do |format|
       format.js {render inline: "location.reload();" }
     end

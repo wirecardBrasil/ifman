@@ -11,7 +11,10 @@
       <%= link_to destroy_feature_path(feature), data: { confirm: "Are you sure want to delete feature '#{feature}'?" }, method: :delete, remote: true, class: "btn-flat waves-effect waves-light right blue-text" do %>
         <i class="material-icons">delete</i>
       <% end %>
-      <%= link_to "#{feature}", feature_path(feature), class: "collection-item blue-text" %>
+      <%= link_to feature_path(feature), class: "btn-flat waves-effect waves-light right blue-text" do %>
+        <i class="material-icons">add_box</i>
+      <% end %>
+      <%= link_to "#{feature}", feature_search_path(feature), class: "collection-item blue-text" %>
     <% end %>
   </div>
 </div>

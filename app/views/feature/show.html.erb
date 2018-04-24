@@ -2,7 +2,7 @@
   <%= page_indicator "Feature #{@feature}" %>
 <% end%>
 
-<h5 class="header deep-purple-text" id="feature"><%= @feature %></h5>
+<%= render partial: "title", feature: @feature %>
 
 <div class="col s12">
   <%= form_tag update_feature_percentage_path(@feature), method: :put, remote: true do %>
@@ -31,7 +31,6 @@
     </div>
     <div class="col s2">
       <%= submit_tag 'add', class: 'btn deep-purple', id: 'add-user' %>
-      <%= link_to "Search Users", feature_list_path(@feature), class: "collection-item blue-text" %>
     </div>
   <% end %>
 </div>
