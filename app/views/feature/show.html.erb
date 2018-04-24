@@ -26,7 +26,8 @@
 <div class="col s12">
   <%= form_tag add_feature_user_path(@feature), id: 'add-user-form', remote: true do %>
     <h5 class="header blue-text"><i class="material-icons">supervisor_account</i> Users</h5>
-    <div class="col s10">
+    <div class="input-field">
+        <%= label_tag 'user1, user2, user3,...' %>
         <%= text_field_tag 'user', nil %>
     </div>
     <div class="col s2">
