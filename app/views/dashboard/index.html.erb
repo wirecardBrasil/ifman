@@ -11,6 +11,9 @@
       <%= link_to destroy_feature_path(feature), data: { confirm: "Are you sure want to delete feature '#{feature}'?" }, method: :delete, remote: true, class: "btn-flat waves-effect waves-light right blue-text" do %>
         <i class="material-icons">delete</i>
       <% end %>
+      <%= link_to feature_list_path(feature), class: "btn-flat waves-effect waves-light right blue-text" do %>
+        <i class="material-icons">list</i>
+      <% end %>
       <%= link_to feature_search_path(feature), class: "btn-flat waves-effect waves-light right blue-text" do %>
         <i class="material-icons">search</i>
       <% end %>

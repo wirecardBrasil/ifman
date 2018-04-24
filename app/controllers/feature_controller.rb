@@ -1,11 +1,18 @@
 class FeatureController < ApplicationController
 
-  def search
+  def list
     @feature = params[:id]
+    @cardinality = redis_connection.scard("feature:#{@feature}:users")
+    @should_list = @cardinality < 20
+    @users = redis_connection.smembers("feature:#{@feature}:users") if @should_list
   end
 
   def new
     @percentage = 0
+  end
+
+  def search
+    @feature = params[:id]
   end
 
   def show

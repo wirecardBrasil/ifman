@@ -1,0 +1,36 @@
+<% content_for :current_page do %>
+  <%= page_indicator "Feature #{@feature}" %>
+<% end%>
+
+<%= render partial: "title", feature: @feature %>
+<div class="col s1">
+  <%= render partial: "add_button", feature: @feature %>
+</div>
+<div class="col s1">
+  <%= render partial: "search_button", feature: @feature %>
+</div>
+
+<% if @should_list %>
+  <div class="col s12">
+    <% @users.each do |user| %>
+      <div class="chip">
+        <span class="user"><%= user %></span>
+        <i class="close material-icons delete-user" onclick="removal(this)">close</i>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col s12">
+      <div class='card'>
+        <div class='card-content deep-purple lighten-1'>
+          <p class="white-text">
+            <i class="material-icons">error</i>
+            Ops... this feature has <b><%= @cardinality %></b> users.
+            For better experience, please search for a specific user.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
