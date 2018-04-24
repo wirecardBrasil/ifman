@@ -3,6 +3,15 @@
 <% end%>
 
 <%= render partial: "title", feature: @feature %>
+<div class="row">
+  <div class="col s1 ">
+    <%= link_to feature_search_path(@feature) do %>
+      <%= button_tag class: 'btn deep-purple valign-wrapper', id: 'search-user' do %>
+        <i class="material-icons">search</i>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
 <div class="col s12">
   <%= form_tag update_feature_percentage_path(@feature), method: :put, remote: true do %>
@@ -17,28 +26,35 @@
         <output id="range"> <%= @percentage %> </output>
       </div>
     </div>
-    <div class="col s2">
-      <%= submit_tag 'save', class: 'btn deep-purple', id: 'update-percentage' %>
+    <div class="col s1">
+      <%= button_tag class: 'btn deep-purple', id: 'update-percentage' do %>
+        <i class="material-icons">save</i>
+      <% end %>
     </div>
   <% end %>
 </div>
 
 <div class="col s12">
-  <%= form_tag add_feature_user_path(@feature), id: 'add-user-form', remote: true do %>
-    <h5 class="header blue-text"><i class="material-icons">supervisor_account</i> Users</h5>
-    <div class="input-field col s10">
-        <%= label_tag 'user1, user2, user3,...' %>
-        <%= text_field_tag 'user', nil %>
-    </div>
-    <div class="col s2">
-      <%= submit_tag 'add', class: 'btn deep-purple', id: 'add-user' %>
-    </div>
-  <% end %>
-</div>
-
-<% if flash[:notice] %>
-  <div class="alert alert-danger" role="alert">
-    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-    <%= flash.notice() %>
+  <div class="row">
+    <%= form_tag add_feature_user_path(@feature), id: 'add-user-form', remote: true do %>
+      <h5 class="header blue-text"><i class="material-icons">supervisor_account</i> Users</h5>
+      <div class="input-field col s10">
+          <%= label_tag 'user1, user2, user3,...' %>
+          <%= text_field_tag 'user', nil %>
+      </div>
+      <div class="col s1">
+        <%= button_tag class: 'btn deep-purple', id: 'add-user' do %>
+          <i class="material-icons">add_box</i>
+        <% end %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+  <div class="row">
+    <% if flash[:notice] %>
+      <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <%= flash.notice() %>
+      </div>
+    <% end %>
+  </div>
+</div>
