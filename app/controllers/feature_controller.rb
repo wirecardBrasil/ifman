@@ -1,5 +1,9 @@
 class FeatureController < ApplicationController
 
+  def search
+    @feature = params[:id]
+  end
+
   def new
     @percentage = 0
   end
@@ -7,8 +11,6 @@ class FeatureController < ApplicationController
   def show
     @feature = params[:id]
     @percentage = redis_connection.get("feature:#{@feature}:percentage")
-    @cardinality = redis_connection.scard("feature:#{@feature}:users")
-    @users = redis_connection.smembers("feature:#{@feature}:users") unless @cardinality > 20
   end
 
   def create
@@ -16,23 +18,30 @@ class FeatureController < ApplicationController
       flash[:error] = "Features names cannot contains \":\""
       redirect_to controller: :feature, action: :new
     else
-      redis_connection.set("feature:#{params[:feature]}:percentage", params[:percentage])
-      redis_connection.sadd("feature:#{params[:feature]}:users", params[:users].strip) if params[:users].length > 0
-
+      redis_connection.set("feature:#{params[:feature]}:percentage", 50)
       redirect_to controller: :dashboard, action: :index
     end
   end
 
-  def destroy
-    redis_connection.del("feature:#{params[:id]}:percentage")
-    redis_connection.del("feature:#{params[:id]}:users")
+  def add_user
+    users = params[:user].split(',')
+    users.each do |user|
+      redis_connection.sadd("feature:#{params[:id]}:users", user.strip)
+    end
+    flash.notice = "Added '#{params[:user].strip}'"
     respond_to do |format|
       format.js {render inline: "location.reload();" }
     end
   end
 
-  def add_user
-    redis_connection.sadd("feature:#{params[:id]}:users", params[:user].strip)
+  def delete_user
+    redis_connection.srem("feature:#{params[:id]}:users", params[:user])
+    render json: {user: params[:user]}, status: 200
+  end
+
+  def destroy
+    redis_connection.del("feature:#{params[:id]}:percentage")
+    redis_connection.del("feature:#{params[:id]}:users")
     respond_to do |format|
       format.js {render inline: "location.reload();" }
     end
@@ -45,11 +54,6 @@ class FeatureController < ApplicationController
     else
       render nothing: true, status: 404
     end
-  end
-
-  def delete_user
-    redis_connection.srem("feature:#{params[:id]}:users", params[:user])
-    render json: {user: params[:user]}, status: 200
   end
 
   def update_percentage

@@ -21,27 +21,6 @@
     <%= text_field_tag 'feature', nil, required: true %>
   </div>
 
-  <%= label_tag 'percentage', "Percentage" %>
-  <div class="row">
-    <div class="col s11">
-      <div class="input-field">
-        <p class="range-field">
-          <input type="range" id="percentage" name="percentage" min="0" max="100" onchange="range.value=value"/>
-        </p>
-      </div>
-    </div>
-    <div class="col s1">
-      <div class="chip">
-        <output id="range"> 50 </output>
-      </div>
-    </div>
-  </div>
-
-  <div class="input-field">
-    <%= label_tag 'Users' %>
-    <%= text_field_tag 'users', nil %>
-  </div>
-
   <br>
 
   <%= submit_tag 'Create', class: 'btn right deep-purple' %>
