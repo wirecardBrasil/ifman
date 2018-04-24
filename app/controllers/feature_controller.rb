@@ -24,8 +24,11 @@ class FeatureController < ApplicationController
   end
 
   def add_user
-    redis_connection.sadd("feature:#{params[:id]}:users", params[:user].strip)
-    flash.notice = "Added user '#{params[:user].strip}'"
+    users = params[:user].split(',')
+    users.each do |user|
+      redis_connection.sadd("feature:#{params[:id]}:users", user.strip)
+    end
+    flash.notice = "Added '#{params[:user].strip}'"
     respond_to do |format|
       format.js {render inline: "location.reload();" }
     end
