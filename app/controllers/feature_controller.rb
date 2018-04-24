@@ -11,6 +11,11 @@ class FeatureController < ApplicationController
     @percentage = 0
   end
 
+  def report
+    @users = list_features(params[:id])
+    render stream: true, layout: false, content_type: "application/text"
+  end
+
   def search
     @feature = params[:id]
   end
@@ -35,7 +40,7 @@ class FeatureController < ApplicationController
     users.each do |user|
       redis_connection.sadd("feature:#{params[:id]}:users", user.strip)
     end
-    flash.notice = "Added '#{params[:user].strip}'"
+    flash.notice = "Added '#{users.length}' features"
     respond_to do |format|
       format.js {render inline: "location.reload();" }
     end
@@ -68,6 +73,14 @@ class FeatureController < ApplicationController
     respond_to do |format|
       format.js {render inline: "location.reload();" }
     end
+  end
+
+  private
+
+  def list_features(feature, pointer = 0)
+     pointer, bunch = redis_connection.sscan("feature:#{feature}:users", pointer)
+     bunch = bunch + list_features(feature, pointer) unless pointer.to_i.zero?
+     bunch
   end
 
 end

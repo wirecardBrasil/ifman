@@ -9,6 +9,9 @@
 <div class="col s1">
   <%= render partial: "search_button", feature: @feature %>
 </div>
+<div class="col s1">
+  <%= render partial: "report_button", feature: @feature %>
+</div>
 
 <% if @should_list %>
   <div class="col s12">
@@ -27,7 +30,8 @@
           <p class="white-text">
             <i class="material-icons">error</i>
             Ops... this feature has <b><%= @cardinality %></b> users.
-            For better experience, please search for a specific user.
+            For better experience, please search(<i class="material-icons">search</i>) for a specific user or download
+            a report(<i class="material-icons">list</i>).
           </p>
         </div>
       </div>
