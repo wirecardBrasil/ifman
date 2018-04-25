@@ -3,8 +3,8 @@ class FeatureController < ApplicationController
   def list
     @feature = params[:id]
     @cardinality = redis_connection.scard("feature:#{@feature}:users")
-    @should_list = @cardinality < 20
-    @users = redis_connection.smembers("feature:#{@feature}:users") if @should_list
+    @has_users = @cardinality > 0
+    @users = redis_connection.smembers("feature:#{@feature}:users")
   end
 
   def new
@@ -12,7 +12,7 @@ class FeatureController < ApplicationController
   end
 
   def report
-    @users = list_features(params[:id])
+    @users = list_users(params[:id])
     render stream: true, layout: false, content_type: "application/text"
   end
 
@@ -79,7 +79,7 @@ class FeatureController < ApplicationController
 
   private
 
-  def list_features(feature, pointer = 0)
+  def list_users(feature, pointer = 0)
      pointer, bunch = redis_connection.sscan("feature:#{feature}:users", pointer)
      bunch = bunch + list_features(feature, pointer) unless pointer.to_i.zero?
      bunch

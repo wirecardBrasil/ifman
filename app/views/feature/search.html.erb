@@ -3,27 +3,23 @@
 <% end%>
 
 <%= render partial: "title", feature: @feature %>
-<%= render partial: "add_button", feature: @feature %>
 
 <div class="row">
   <div class="col s12">
-    <div class='card'>
-      <div class='card-action'>
-        <div class="row">
-          <%= form_tag "#", :onSubmit => "return false" do %>
-            <h5 class="header blue-text">Search Users</h5>
-            <div class="col s10">
-              <%= text_field_tag 'search', nil %>
-            </div>
-            <div class="col s1">
-              <%= button_tag class: 'btn deep-purple', id: 'search-user' do %>
-                <i class="material-icons">search</i>
-              <% end %>
-            </div>
-          <% end %>
-          <div class="col s12" id='user-list'>
-          </div>
+    <div class="row">
+      <%= form_tag "#", :onSubmit => "return false" do %>
+        <h5 class="header blue-text"><i class="material-icons">search</i> Search Users</h5>
+        <div class="input-field col s10">
+          <%= label_tag 'Search for specific user' %>
+          <%= text_field_tag 'search', nil %>
         </div>
+        <div class="col s2">
+          <%= button_tag class: 'btn deep-purple', id: 'search-user' do %>
+            search <i class="material-icons btn-icon">search</i>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="col s12" id='user-list'>
       </div>
     </div>
   </div>
