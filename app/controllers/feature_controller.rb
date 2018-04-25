@@ -23,6 +23,10 @@ class FeatureController < ApplicationController
   def show
     @feature = params[:id]
     @percentage = redis_connection.get("feature:#{@feature}:percentage")
+    @cardinality = redis_connection.scard("feature:#{@feature}:users")
+    @has_users = @cardinality > 0
+    @should_list = @cardinality < 50
+    @users = redis_connection.smembers("feature:#{@feature}:users") if @should_list
   end
 
   def create
@@ -37,10 +41,8 @@ class FeatureController < ApplicationController
 
   def add_user
     users = params[:user].split(',')
-    users.each do |user|
-      redis_connection.sadd("feature:#{params[:id]}:users", user.strip)
-    end
-    flash.notice = "Added '#{users.length}' features"
+    result = redis_connection.sadd("feature:#{params[:id]}:users", users.map{ |user| user.strip })
+    flash.notice = "Added '#{result}' users to feature #{params[:id]}"
     respond_to do |format|
       format.js {render inline: "location.reload();" }
     end

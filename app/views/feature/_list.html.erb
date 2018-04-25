@@ -1,0 +1,43 @@
+<%= form_tag add_feature_user_path(@feature), id: 'list-user-form', remote: true do %>
+  <h5 class="header blue-text"><i class="material-icons">subject</i> List</h5>
+  <% unless @has_users %>
+    <div class="col s12">
+      <div class="chip">
+        <span>Ops... this feature has no users. Add users to this feature to start using IfMan!</span>
+      </div>
+    </div>
+  <% end %>
+  <% if @should_list %>
+    <div class="col s12">
+      <% @users.each do |user| %>
+        <div class="chip">
+          <span class="user"><%= user %></span>
+          <i class="close material-icons delete-user" onclick="removal(this)">close</i>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="row">
+      <div class="col s12">
+        <div class="card">
+          <div class="card-content deep-purple lighten-1">
+            <p class="white-text">
+              <i class="material-icons">error</i>
+              Ops... this feature has <b><%= @cardinality %></b> users.
+              For a better experience, please search for a specific user or download
+              a report.
+            </p>
+          </div>
+          <div class="card-action deep-purple lighten-2">
+            <%= link_to 'feature#report', class: "white-text" do %>
+              search <i class="material-icons btn-icon">search</i>
+            <% end %>
+            <%= link_to 'feature#report', class: "white-text" do %>
+              Download report <i class="material-icons btn-icon">file_download</i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

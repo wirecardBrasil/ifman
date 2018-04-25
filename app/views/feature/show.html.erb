@@ -28,9 +28,14 @@
 <div class="col s12">
   <%= form_tag add_feature_user_path(@feature), id: 'add-user-form', remote: true do %>
     <h5 class="header blue-text"><i class="material-icons">supervisor_account</i> Users</h5>
-    <div class="input-field col s10">
+    <div class="input-field col s9">
         <%= label_tag 'user1, user2, user3,...' %>
         <%= text_field_tag 'user', nil %>
+    </div>
+    <div class="col s1">
+      <div class="chip">
+        <%= @cardinality %>
+      </div>
     </div>
     <div class="col s2">
       <%= button_tag :submit, class: 'btn deep-purple', id: 'add-user' do %>
@@ -38,12 +43,18 @@
       <% end %>
     </div>
   <% end %>
+</div>
+
+<div class="col 12">
   <% if flash[:notice] %>
-    <div class="alert alert-danger" role="alert">
+    <div class="chip">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       <%= flash.notice() %>
+      <i class="close material-icons">close</i>
     </div>
   <% end %>
 </div>
 
-<%= render partial: "search_button", feature: @feature %>
+<div class="col s12">
+  <%= render partial: "list", feature: @feature %>
+</div>
