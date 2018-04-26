@@ -13,4 +13,10 @@ class LoginController < ApplicationController
     redirect_to controller: :dashboard, action: :index
   end
 
+  def logout
+    session[:user] = nil
+    session[:password] = nil
+    redirect_to controller: :login, action: :index
+  end
+
 end

@@ -48,7 +48,9 @@
             <a href="/dashboard" class="breadcrumb">IFMAN</a>
             <% if content_for?(:current_page) %>
               <a href="#!" class="breadcrumb"><%= content_for?(:current_page) ? yield(:current_page) : "" %></a>
-              <a href="/" class="breadcumb right"><i class="material-icons">power_settings_new</i></a>
+              <%= link_to "/logout", method: :delete, class: "breadcumb right" do %>
+                <i class="material-icons">power_settings_new</i>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -61,6 +63,9 @@
           <div class="col-md-3">
           </div>
           <div class="col-md-6">
+            <% unless session[:user].blank? %>
+              <span class="new badge" data-badge-caption=""><b>redis:</b> <%= session[:user] %></span>
+            <% end %>
             <%= yield %>
           </div>
           <div class="col-md-3">

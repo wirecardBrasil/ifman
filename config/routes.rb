@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :login
 
   get '/dashboard', to: 'dashboard#index'
+  delete '/logout', to: 'login#logout'
 
   scope '/feature' do
     delete '/:id', to: 'feature#destroy', as: 'destroy_feature'
