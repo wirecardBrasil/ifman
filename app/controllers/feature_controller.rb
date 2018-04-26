@@ -81,7 +81,7 @@ class FeatureController < ApplicationController
 
   def list_users(feature, pointer = 0)
      pointer, bunch = redis_connection.sscan("feature:#{feature}:users", pointer)
-     bunch = bunch + list_features(feature, pointer) unless pointer.to_i.zero?
+     bunch = bunch + list_users(feature, pointer) unless pointer.to_i.zero?
      bunch
   end
 
