@@ -25,7 +25,7 @@ class FeatureController < ApplicationController
     @percentage = redis_connection.get("feature:#{@feature}:percentage")
     @cardinality = redis_connection.scard("feature:#{@feature}:users")
     @has_users = @cardinality > 0
-    @should_list = @cardinality < 50
+    @should_list = @cardinality < 100
     @users = redis_connection.smembers("feature:#{@feature}:users") if @should_list
   end
 

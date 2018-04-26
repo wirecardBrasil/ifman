@@ -37,9 +37,9 @@
         </div>
       <% end %>
       <% @users.each do |user| %>
-        <div class="chip">
+        <div class="chip chip-size" title="Arrumar">
           <span class="user"><%= user %></span>
-          <i class="close material-icons delete-user" onclick="removal(this)">close</i>
+          <i class="close material-icons delete-user close-position" onclick="removal(this)">close</i>
         </div>
       <% end %>
     </div>
