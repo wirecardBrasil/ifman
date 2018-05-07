@@ -3,7 +3,7 @@ class LoginController < ApplicationController
   before_filter :redis_connection, except: [:index, :create]
   before_filter :connection_available?, except: [:index, :create]
 
-  before_action :verify_login
+  before_action :verify_login, except: [:destroy]
 
   def index
   end
@@ -15,7 +15,7 @@ class LoginController < ApplicationController
     redirect_to controller: :dashboard, action: :index
   end
 
-  def logout
+  def destroy
     session[:user] = nil
     session[:password] = nil
     redirect_to controller: :login, action: :index

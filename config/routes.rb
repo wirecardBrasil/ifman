@@ -2,10 +2,11 @@ Rails.application.routes.draw do
 
   root to: 'login#index'
 
-  resources :login
+  get '/login', to: 'login#index'
+  post '/login', to: 'login#create'
+  delete '/login', to: 'login#destroy'
 
   get '/dashboard', to: 'dashboard#index'
-  delete '/logout', to: 'login#logout'
 
   scope '/feature' do
     delete '/:id', to: 'feature#destroy', as: 'destroy_feature'

@@ -48,7 +48,7 @@
             <a href="/dashboard" class="breadcrumb">IFMAN</a>
             <% if content_for?(:current_page) %>
               <a href="#!" class="breadcrumb"><%= content_for?(:current_page) ? yield(:current_page) : "" %></a>
-              <%= link_to "/logout", method: :delete, class: "breadcumb right" do %>
+              <%= link_to '/login', method: :delete, class: "breadcumb right" do %>
                 <i class="material-icons">power_settings_new</i>
               <% end %>
             <% end %>
