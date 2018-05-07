@@ -3,6 +3,8 @@ class LoginController < ApplicationController
   before_filter :redis_connection, except: [:index, :create]
   before_filter :connection_available?, except: [:index, :create]
 
+  before_action :verify_login
+
   def index
   end
 
@@ -17,6 +19,11 @@ class LoginController < ApplicationController
     session[:user] = nil
     session[:password] = nil
     redirect_to controller: :login, action: :index
+  end
+
+  private
+  def verify_login
+    redirect_to controller: :dashboard, action: :index if session[:user].present?
   end
 
 end
