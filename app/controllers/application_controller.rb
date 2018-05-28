@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def redis_connection
     begin
       @redis ||= Redis.new(url: "redis://:#{session[:password]}@#{session[:user]}")
-      @redis.inspect
+      @redis.ping
     rescue
       flash[:error] = "Connection to redis failed"
       redirect_to controller: :login, action: :index

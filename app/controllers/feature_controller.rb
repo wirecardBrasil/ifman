@@ -3,8 +3,8 @@ class FeatureController < ApplicationController
   def list
     @feature = params[:id]
     @cardinality = redis_connection.scard("feature:#{@feature}:users")
-    @should_list = @cardinality < 20
-    @users = redis_connection.smembers("feature:#{@feature}:users") if @should_list
+    @has_users = @cardinality > 0
+    @users = redis_connection.smembers("feature:#{@feature}:users")
   end
 
   def new
@@ -12,7 +12,7 @@ class FeatureController < ApplicationController
   end
 
   def report
-    @users = list_features(params[:id])
+    @users = list_users(params[:id])
     render stream: true, layout: false, content_type: "application/text"
   end
 
@@ -23,6 +23,10 @@ class FeatureController < ApplicationController
   def show
     @feature = params[:id]
     @percentage = redis_connection.get("feature:#{@feature}:percentage")
+    @cardinality = redis_connection.scard("feature:#{@feature}:users")
+    @has_users = @cardinality > 0
+    @should_list = @cardinality < 100
+    @users = redis_connection.smembers("feature:#{@feature}:users") if @should_list
   end
 
   def create
@@ -37,10 +41,8 @@ class FeatureController < ApplicationController
 
   def add_user
     users = params[:user].split(',')
-    users.each do |user|
-      redis_connection.sadd("feature:#{params[:id]}:users", user.strip)
-    end
-    flash.notice = "Added '#{users.length}' features"
+    result = redis_connection.sadd("feature:#{params[:id]}:users", users.map{ |user| user.strip })
+    flash.notice = "Added '#{result}' users to feature #{params[:id]}"
     respond_to do |format|
       format.js {render inline: "location.reload();" }
     end
@@ -77,9 +79,9 @@ class FeatureController < ApplicationController
 
   private
 
-  def list_features(feature, pointer = 0)
+  def list_users(feature, pointer = 0)
      pointer, bunch = redis_connection.sscan("feature:#{feature}:users", pointer)
-     bunch = bunch + list_features(feature, pointer) unless pointer.to_i.zero?
+     bunch = bunch + list_users(feature, pointer) unless pointer.to_i.zero?
      bunch
   end
 

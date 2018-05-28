@@ -3,38 +3,45 @@
 <% end%>
 
 <%= render partial: "title", feature: @feature %>
-<div class="col s1">
-  <%= render partial: "add_button", feature: @feature %>
-</div>
-<div class="col s1">
-  <%= render partial: "search_button", feature: @feature %>
-</div>
-<div class="col s1">
-  <%= render partial: "report_button", feature: @feature %>
-</div>
 
-<% if @should_list %>
+<div class="row">
   <div class="col s12">
-    <% @users.each do |user| %>
-      <div class="chip">
-        <span class="user"><%= user %></span>
-        <i class="close material-icons delete-user" onclick="removal(this)">close</i>
+    <div class="row">
+      <h5 class="header blue-text"><i class="material-icons">subject</i> List of users</h5>
+    </div>
+
+    <div class="row align-center">
+      <div class="col s2">
+        <%= link_to "/feature/#{@feature}", class: 'btn deep-purple' do %>
+          Feature <i class="material-icons btn-icon">subject</i>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-<% else %>
-  <div class="row">
-    <div class="col s12">
-      <div class='card'>
-        <div class='card-content deep-purple lighten-1'>
-          <p class="white-text">
-            <i class="material-icons">error</i>
-            Ops... this feature has <b><%= @cardinality %></b> users.
-            For better experience, please search(<i class="material-icons">search</i>) for a specific user or download
-            a report(<i class="material-icons">list</i>).
-          </p>
-        </div>
+      <div class="col s2">
+        <%= link_to "/feature/#{@feature}/search", class: 'btn deep-purple' do %>
+          Search <i class="material-icons btn-icon">search</i>
+        <% end %>
+      </div>
+      <div class="col s2">
+        <%= link_to "/feature/#{@feature}/report", class: "btn deep-purple" do %>
+          Report <i class="material-icons btn-icon">file_download</i>
+        <% end %>
       </div>
     </div>
+
+    <div class="row">
+      <% unless @has_users %>
+        <div class="col s12">
+          <div class="chip">
+            <span>Ops... this feature has no users. Add users to this feature to start using IfMan!</span>
+          </div>
+        </div>
+      <% end %>
+      <% @users.each do |user| %>
+        <div class="chip chip-size" title="Arrumar">
+          <span class="user"><%= user %></span>
+          <i class="close material-icons delete-user close-position" onclick="removal(this)">close</i>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

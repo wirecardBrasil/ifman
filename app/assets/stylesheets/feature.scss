@@ -6,6 +6,30 @@
   width: 100%;
 }
 
+.btn-icon {
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+.chip-size {
+  width: 180px;
+  position: relative;
+}
+
+.user {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  padding-right: 20px;
+}
+
+.close-position {
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+
 .range {
     display: table;
     position: relative;
