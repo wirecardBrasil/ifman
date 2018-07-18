@@ -34,7 +34,7 @@ class FeatureController < ApplicationController
       flash[:error] = "Features names cannot contains \":\""
       redirect_to controller: :feature, action: :new
     else
-      redis_connection.set("feature:#{params[:feature]}:percentage", 50)
+      redis_connection.set("feature:#{params[:feature]}:percentage", 0)
       redirect_to controller: :dashboard, action: :index
     end
   end
