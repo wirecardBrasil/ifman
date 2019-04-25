@@ -1,10 +1,10 @@
-# ![IfMan](https://raw.githubusercontent.com/moip/ifman/master/app/assets/images/ifman.png)
+# ![IfMan](https://raw.githubusercontent.com/wirecardBrasil/ifman/master/app/assets/images/ifman.png)
 
 **IfMan** is a GUI (Graphical User Interface) for **Curtain**.
 
 Checkout about Curtain, an easy way to control your features using [redis](http://redis.io/), available for
-- Java as [JCurtain](https://github.com/moip/jcurtain).
-- Ruby as [RCurtain](https://github.com/moip/rcurtain).
+- Java as [JCurtain](https://github.com/wirecardBrasil/jcurtain).
+- Ruby as [RCurtain](https://github.com/wirecardBrasil/rcurtain).
 
 ## Running
 
@@ -35,9 +35,9 @@ Password: p4ssw0rd
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/moip/ifman. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/wirecardBrasil/ifman. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-1. Fork it ( https://github.com/moip/ifman/fork )
+1. Fork it ( https://github.com/wirecardBrasil/ifman/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
