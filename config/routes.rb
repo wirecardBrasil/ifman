@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   scope '/feature' do
     delete '/:id', to: 'feature#destroy', as: 'destroy_feature'
-    delete '/:id/user/:user', to: 'feature#delete_user', as: 'delete_user'
+    delete '/:id/user/:user', :constraints => { user: /.+/ }, to: 'feature#delete_user', as: 'delete_user'
     get '/new', to: 'feature#new', as: 'new_feature'
     get '/:id', to: 'feature#show', as: 'feature'
     get '/:id/user/:user', to: 'feature#search_user', as: 'search_user'
