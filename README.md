@@ -22,7 +22,7 @@ Password: redis
 * To use **IfMan**, first your need to initialize the configuration defining your **redis URI** as Login and **redis password** as Password.
 
 ```
-Login:    10.0.1.1:6380
+Login:    10.0.1.1:6379
 Password: p4ssw0rd
 ```
 
