@@ -6,7 +6,7 @@ Checkout about Curtain, an easy way to control your features using [redis](http:
 - Java as [JCurtain](https://github.com/wirecardBrasil/jcurtain).
 - Ruby as [RCurtain](https://github.com/wirecardBrasil/rcurtain).
 
-### Running
+#### Running
 
 IfMan uses Redis to control it's features. You can run IfMan with Redis locally using [docker](https://docs.docker.com/engine/installation/).
 - `docker-compose up --build`
